@@ -17,6 +17,7 @@ import {
   postsToLinkIndex,
 } from "@/lib/blog-links";
 import { parseCodeFence } from "@/lib/code-fence";
+import { highlightMarkdown } from "@/lib/highlight";
 import { getPostCoverSrc } from "@/lib/thumbnail";
 
 function flattenText(node: React.ReactNode): string {
@@ -42,7 +43,7 @@ function stripScriptTags(value: string) {
     .replace(/<script[^>]*\/>/gi, "");
 }
 
-export function BlogPostView({
+export async function BlogPostView({
   post,
   markdown,
   headings,
@@ -56,6 +57,8 @@ export function BlogPostView({
   const safeMarkdown = stripScriptTags(
     normalizeBlogMarkdownForSite(markdown, linkIndex),
   );
+  // Pre-highlight fenced code blocks with Shiki (server-side async)
+  const highlightedMarkdown = await highlightMarkdown(safeMarkdown);
   const coverSrc = getPostCoverSrc(post);
   let headingIndex = 0;
 
@@ -154,29 +157,36 @@ export function BlogPostView({
                 {children}
               </ol>
             ),
-            code: ({ className, children }) => {
-              const { language, filePath } = parseCodeFence(className);
+            /* Fenced code blocks — pre-highlighted by Shiki in highlightMarkdown().
+               The <pre> carries data-language and optional data-filepath. */
+            pre: (props) => {
+              const { children, ...rest } = props;
+              const dataProps = rest as Record<string, unknown>;
+              const language = dataProps["data-language"] as string | undefined;
+              const filePath = dataProps["data-filepath"] as string | undefined;
+
+              // Raw text for copy button (shiki tokens preserve text content)
               const rawCode = flattenText(children).replace(/\n$/, "");
-              const isInline = !className?.includes("language-");
 
-              if (isInline) {
-                return (
-                  <code className="rounded bg-neutral-100 px-1 py-0.5 font-mono text-[0.92em] text-neutral-800 dark:bg-zinc-800 dark:text-zinc-200">
-                    {children}
-                  </code>
-                );
-              }
-
+              // Mermaid wasn't highlighted — handle it here
               if (language === "mermaid") {
                 return <MermaidDiagram chart={rawCode} />;
               }
 
               return (
-                <BlogCodeBlock
-                  code={rawCode}
-                  title={filePath}
-                  language={language}
-                />
+                <BlogCodeBlock code={rawCode} language={language} title={filePath}>
+                  {children}
+                </BlogCodeBlock>
+              );
+            },
+            /* Inline code only */
+            code: ({ className, children }) => {
+              const isInline = !className?.includes("language-");
+              if (!isInline) return null;
+              return (
+                <code className="rounded bg-neutral-100 px-1 py-0.5 font-mono text-[0.92em] text-neutral-800 dark:bg-zinc-800 dark:text-zinc-200">
+                  {children}
+                </code>
               );
             },
             img: ({ src, alt }) => {
@@ -253,7 +263,7 @@ export function BlogPostView({
             },
           }}
         >
-          {safeMarkdown}
+          {highlightedMarkdown}
         </ReactMarkdown>
       </div>
 
