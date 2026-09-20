@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "obsidianPath": "Blog/Drafts/example-note.md",
+      "blogPath": "content/blog/frontend/example-note.md",
+      "blogSlug": "frontend/example-note",
+      "contentHash": "",
+      "lastSyncedAt": null,
+      "lastSource": null
+    }
+  ]
+}

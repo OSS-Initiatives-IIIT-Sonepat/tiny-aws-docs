@@ -1,0 +1,20 @@
+{
+  "vaultPath": "/absolute/path/to/your/ObsidianVault",
+  "mappings": [
+    {
+      "obsidianFolder": "Blogs/Drafts",
+      "blogCategory": "frontend",
+      "direction": "bidirectional"
+    },
+    {
+      "obsidianFolder": "Blogs/about",
+      "blogCategory": "about",
+      "direction": "bidirectional"
+    }
+  ],
+  "obsidianPublishFolder": "Blogs/Drafts",
+  "obsidianBlogRoot": "Blogs",
+  "ignore": [".obsidian", "Templates", "Daily"],
+  "syncFrontmatter": true,
+  "wikilinkMode": "markdown"
+}
