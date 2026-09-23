@@ -16,6 +16,7 @@ import {
   normalizeBlogMarkdownForSite,
   postsToLinkIndex,
 } from "@/lib/blog-links";
+import { parseCodeFence } from "@/lib/code-fence";
 import { getPostCoverSrc } from "@/lib/thumbnail";
 
 function flattenText(node: React.ReactNode): string {
@@ -154,9 +155,7 @@ export function BlogPostView({
               </ol>
             ),
             code: ({ className, children }) => {
-              const language = className?.startsWith("language-")
-                ? className.replace("language-", "")
-                : undefined;
+              const { language, filePath } = parseCodeFence(className);
               const rawCode = flattenText(children).replace(/\n$/, "");
               const isInline = !className?.includes("language-");
 
@@ -172,7 +171,13 @@ export function BlogPostView({
                 return <MermaidDiagram chart={rawCode} />;
               }
 
-              return <BlogCodeBlock code={rawCode} title={language} />;
+              return (
+                <BlogCodeBlock
+                  code={rawCode}
+                  title={filePath}
+                  language={language}
+                />
+              );
             },
             img: ({ src, alt }) => {
               const isIcon = alt?.startsWith("icon:") === true;
