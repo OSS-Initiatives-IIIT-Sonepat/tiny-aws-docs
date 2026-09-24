@@ -183,14 +183,22 @@ export function getBlogCategories(posts: BlogPost[]): BlogCategory[] {
     });
   }
 
+  const ORDER: Record<string, number> = {
+    "about": 0,
+    "linux-fundamentals": 1,
+    "networking-fundamentals": 2,
+    "building-the-cloud": 3,
+  };
+
   return [...byCategory.values()]
     .map((category) => ({
       ...category,
       items: category.items.sort((a, b) => a.href.localeCompare(b.href)),
     }))
     .sort((a, b) => {
-      if (a.slug === "about") return -1;
-      if (b.slug === "about") return 1;
+      const oa = ORDER[a.slug] ?? 99;
+      const ob = ORDER[b.slug] ?? 99;
+      if (oa !== ob) return oa - ob;
       return a.name.localeCompare(b.name);
     });
 }
