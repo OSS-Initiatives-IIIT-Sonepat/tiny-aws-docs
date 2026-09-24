@@ -80,7 +80,7 @@ export function Navbar({
             className="flex w-fit items-center gap-3"
             prefetch
           >
-            <LogoIcon className="w-6 rotate-180 text-foreground" />
+            <LogoIcon className="h-9 w-9" />
             <span className="font-[family-name:var(--font-orbitron)] text-xl font-bold tracking-tight">
               tiny-aws docs
             </span>
