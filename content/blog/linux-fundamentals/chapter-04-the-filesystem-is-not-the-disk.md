@@ -24,6 +24,8 @@ The Linux kernel has a layer called the VFS — the Virtual File System. It's an
 
 This means the kernel can present things as files without them being on a disk at all.
 
+![The Linux storage stack: from application to disk blocks](/linux-fundamentals/ch04-the-filesystem/linux-storage-stack-explained.png)
+
 ---
 
 `/proc` is the clearest example.
@@ -36,6 +38,8 @@ There is no disk. There is no storage. `/proc` is a filesystem that the kernel g
 
 This is not a quirk. It's deliberate design. The Unix philosophy is that programs communicate through text, and files are the universal interface. If the kernel's internal state looks like files, then every standard tool — `cat`, `grep`, `ls`, `awk` — can inspect it without any special APIs.
 
+![How /proc works: the kernel generates filesystem entries on demand](/linux-fundamentals/ch04-the-filesystem/how-proc-works-a-linux-flowchart.png)
+
 ---
 
 `/sys` works the same way.
@@ -47,6 +51,8 @@ No database. No daemon. Just files that happen to be wired directly into kernel 
 `/sys/class/net` shows you network interfaces. `/sys/block` shows you block devices. `/dev` contains device files — special files where reads and writes go directly to hardware drivers. Writing to `/dev/sda` writes to your disk. Reading from `/dev/urandom` asks the kernel's random number generator for bytes.
 
 Everything is a file. That's the rule. And the VFS is what makes the rule work — it's the layer that lets "file" mean anything the kernel wants it to mean, not just "data on a disk."
+
+![Linux virtual filesystems: /sys, /dev, and how the VFS unifies them](/linux-fundamentals/ch04-the-filesystem/linux-filesystems-sys-dev-and-vfs.png)
 
 ---
 
@@ -61,6 +67,8 @@ This is why you can have multiple names for the same file — hard links. Two di
 It's also why deleting a file doesn't always free space. The kernel keeps an inode alive as long as anything is pointing at it — a directory entry, or an open file descriptor in a running process. The data stays until the last reference is gone.
 
 Understanding inodes matters here because when you start working with namespaces and overlay filesystems, you're working with multiple directory trees that may share underlying inodes. The name you see and the data underneath can be the same object wearing different clothes.
+
+![Inode anatomy: how filenames, hard links, and data blocks relate](/linux-fundamentals/ch04-the-filesystem/inode-anatomy-and-filesystem-links.png)
 
 ---
 
