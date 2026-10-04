@@ -20,6 +20,8 @@ The bootloader's job is to load the kernel.
 
 The kernel is not a small program. It can't just sit in a fixed location on disk like the bootloader can. The bootloader needs to find it, read it into memory, and jump to its entry point. On Linux systems, the bootloader is almost always GRUB. It reads its configuration, finds the kernel image (usually at `/boot/vmlinuz-...`), loads it, and starts it.
 
+![Linux boot process: from power button to kernel handoff](/linux-fundamentals/ch05-how-a-machine-boots/linux-boot-process-power-to-kernel.png)
+
 ---
 
 The kernel starts.
@@ -49,6 +51,8 @@ The bootloader loads this alongside the kernel. It's a small compressed archive 
 Once the real root is mounted, the initramfs calls `pivot_root` or `switch_root` to make the real filesystem the new `/`, and then starts the real PID 1.
 
 This will come back. When we talk about containers and `pivot_root`, we're using the same mechanism the kernel itself uses during boot — swapping one root filesystem for another.
+
+![Linux boot: initramfs to real root via pivot_root](/linux-fundamentals/ch05-how-a-machine-boots/linux-boot-from-initramfs-to-real-root.png)
 
 ---
 
