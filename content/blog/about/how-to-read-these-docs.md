@@ -20,7 +20,7 @@ When a chapter mentions a Tiny-AWS file — `networking.rs`, `sandbox.rs`, and s
 If something does not click on the first read, keep going. Many ideas only make full sense once you have seen the next two or three layers stacked on top.
 ## Suggested reading order
 1. [What is Tiny-AWS?](/about/what-is-tiny-aws)
-2. Linux Fundamentals — chapters 2 through 11, in filename order
-3. Networking Fundamentals — chapters 12 through 20, in filename order
-4. Building the Cloud — chapters 21 through 44, in filename order
+2. Linux Fundamentals — chapters 2 through 20, in filename order
+3. Networking Fundamentals — chapters 21 through 29, in filename order
+4. Building the Cloud — chapters 30 through 53, in filename order
 The first two sections teach the primitives. **Building the Cloud** is where you see them assembled into a real system. It walks through every service in tiny-aws — the registry, the agent, the scheduler, storage, messaging, networking, Lambda, IAM — then puts them together: setup, first deploy, multi-machine clusters, Kubernetes on tiny-aws, and using instances as agent sandboxes. It ends with an honest look at what is missing and why each gap is a hard engineering problem.
