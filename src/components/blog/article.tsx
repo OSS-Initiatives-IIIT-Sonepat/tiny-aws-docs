@@ -133,11 +133,14 @@ export function BlogCodeBlock({
   title,
   language,
   className,
+  children,
 }: {
   code: string;
   title?: string;
   language?: string;
   className?: string;
+  /** Pre-highlighted JSX from rehype-pretty-code. When present, renders instead of plain lines. */
+  children?: React.ReactNode;
 }) {
   const displayCode = code.trimEnd();
   const lines = displayCode.split("\n");
@@ -167,20 +170,28 @@ export function BlogCodeBlock({
             showHeader ? "top-2.5" : "top-3",
           )}
         />
-        <pre className="overflow-x-auto p-5 pr-14 text-sm leading-6 text-zinc-100">
-          <code className="table min-w-max font-mono">
-            {lines.map((line, index) => (
-              <span className="table-row" key={`${index}-${line}`}>
-                <span className="table-cell w-8 select-none pr-5 text-right text-xs text-zinc-600">
-                  {index + 1}
+        {children ? (
+          /* Pre-highlighted output from rehype-pretty-code */
+          <pre className="overflow-x-auto p-5 pr-14 text-sm leading-6 [&>code]:block [&>code]:font-mono [&_[data-line]]:block [&_[data-line]]:min-h-[1.5em] [&_[data-line]]:whitespace-pre">
+            {children}
+          </pre>
+        ) : (
+          /* Plain fallback with line numbers */
+          <pre className="overflow-x-auto p-5 pr-14 text-sm leading-6 text-zinc-100">
+            <code className="table min-w-max font-mono">
+              {lines.map((line, index) => (
+                <span className="table-row" key={`${index}-${line}`}>
+                  <span className="table-cell w-8 select-none pr-5 text-right text-xs text-zinc-600">
+                    {index + 1}
+                  </span>
+                  <span className="table-cell whitespace-pre text-zinc-100">
+                    {line || " "}
+                  </span>
                 </span>
-                <span className="table-cell whitespace-pre text-zinc-100">
-                  {line || " "}
-                </span>
-              </span>
-            ))}
-          </code>
-        </pre>
+              ))}
+            </code>
+          </pre>
+        )}
       </div>
     </div>
   );
