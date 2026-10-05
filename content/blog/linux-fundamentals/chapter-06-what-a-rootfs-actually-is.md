@@ -34,6 +34,8 @@ Here are the directories that matter:
 
 **`/proc`** and **`/sys`** — virtual filesystems mounted by the kernel. Not on disk. As discussed in the last chapter.
 
+![Linux filesystem hierarchy: what lives where and why](/linux-fundamentals/ch06-what-a-rootfs/linux-filesystem-hierarchy-explained.png)
+
 ---
 
 A minimal rootfs — one that can actually run programs — needs maybe 200 MB. A bare Debian installation with no extra packages is around that. What it contains at that size:
