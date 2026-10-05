@@ -131,26 +131,41 @@ export function BlogList({ items }: { items: string[] }) {
 export function BlogCodeBlock({
   code,
   title,
+  language,
   className,
 }: {
   code: string;
   title?: string;
+  language?: string;
   className?: string;
 }) {
   const displayCode = code.trimEnd();
   const lines = displayCode.split("\n");
+  const showHeader = Boolean(title || language);
 
   return (
     <div className={cn("space-y-2", className)}>
-      {title ? (
-        <div className="font-mono text-sm font-medium text-neutral-700 dark:text-zinc-300">
-          {title}
-        </div>
-      ) : null}
       <div className="group/code relative overflow-hidden rounded-md border border-zinc-800 bg-[#101116] shadow-[0_18px_44px_rgba(15,15,18,0.18)]">
+        {showHeader ? (
+          <div className="flex items-center gap-3 border-b border-zinc-800 bg-[#14151c] px-4 py-2.5 pr-14">
+            {language ? (
+              <span className="rounded bg-zinc-800 px-2 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wide text-zinc-300">
+                {language}
+              </span>
+            ) : null}
+            {title ? (
+              <span className="min-w-0 truncate font-mono text-sm text-zinc-400">
+                {title}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
         <CopyButton
           code={displayCode}
-          className="absolute right-3 top-3 border-zinc-700 bg-zinc-900/80 opacity-0 backdrop-blur transition-opacity group-hover/code:opacity-100"
+          className={cn(
+            "absolute right-3 border-zinc-700 bg-zinc-900/80 opacity-0 backdrop-blur transition-opacity group-hover/code:opacity-100",
+            showHeader ? "top-2.5" : "top-3",
+          )}
         />
         <pre className="overflow-x-auto p-5 pr-14 text-sm leading-6 text-zinc-100">
           <code className="table min-w-max font-mono">
