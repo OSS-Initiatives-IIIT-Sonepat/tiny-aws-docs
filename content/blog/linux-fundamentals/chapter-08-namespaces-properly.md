@@ -26,6 +26,8 @@ PID namespaces nest. You can create a namespace inside a namespace. From the out
 
 The critical implication: a container's PID 1 has all the special PID 1 responsibilities we discussed — reaping orphans, handling signals properly — but only within its namespace. The host's PID 1 is completely separate.
 
+![Linux PID namespaces: private process tables and how nesting works](/linux-fundamentals/ch08-namespaces/linux-pid-namespaces-explained.png)
+
 ---
 
 ## Mount namespaces
@@ -39,6 +41,8 @@ This is fundamental to container isolation. When a container mounts its rootfs, 
 It also enables the overlayfs trick we'll get to in Chapter 10. The container mounts an overlay filesystem in its private namespace. The host has no idea it's there.
 
 One subtlety: mount namespaces start as a copy of the parent's mounts, not empty. When you create a new mount namespace, you inherit everything the parent had mounted. You then work from there — adding mounts, removing mounts — and none of your changes propagate back.
+
+![Linux mount namespaces: private mount tables and how container mounts stay isolated](/linux-fundamentals/ch08-namespaces/linux-mount-namespaces-explained.png)
 
 ---
 
@@ -75,6 +79,8 @@ That's it. It's the simplest namespace. A container can set its hostname to `web
 
 `systemd-nspawn` sets the container's hostname to the machine name automatically when using `--boot`.
 
+![UTS namespaces: isolating hostname and domain name per container](/linux-fundamentals/ch08-namespaces/uts-namespaces-linux-cheat-sheet.png)
+
 ---
 
 ## IPC namespaces
@@ -84,6 +90,8 @@ IPC — interprocess communication — isolates System V IPC objects: message qu
 An IPC namespace makes those keys private. A container can create shared memory segment with key 42 without conflicting with a host process that has its own shared memory segment with key 42. They're in different namespaces; the keys are independent.
 
 Most modern applications don't use System V IPC directly. But databases sometimes do, and some older software relies on it. The IPC namespace ensures containers are isolated from each other's shared memory.
+
+![Linux IPC namespaces: isolating shared memory, semaphores, and message queues](/linux-fundamentals/ch08-namespaces/linux-ipc-namespaces-infographic.png)
 
 ---
 
@@ -98,6 +106,8 @@ The kernel maintains a mapping: UID X inside the namespace = UID Y on the host. 
 This is the foundation for "rootless containers" — containers that run without root on the host. Docker's rootless mode uses user namespaces. Podman uses them by default.
 
 tiny-aws doesn't use user namespaces. It runs as root on the host. That's acknowledged in `MISSING.md` — it's a deliberate simplification that trades security for legibility.
+
+![Linux user namespaces and rootless containers: UID remapping explained](/linux-fundamentals/ch08-namespaces/linux-user-namespaces-and-rootless-containers.png)
 
 ---
 
