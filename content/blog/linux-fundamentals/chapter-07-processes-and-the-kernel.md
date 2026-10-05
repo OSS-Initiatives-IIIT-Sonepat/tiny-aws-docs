@@ -30,6 +30,8 @@ Every interaction between a process and the outside world — files, network, ti
 
 This boundary is also the enforcement point for namespaces, cgroups, and seccomp. When a process tries to open a file, the kernel checks its mount namespace to determine what filesystem to look in. When a process tries to allocate memory, the kernel checks its cgroup limit. When a process makes a syscall, the kernel checks its seccomp policy. The process can't bypass any of this — it can't avoid the kernel, because the kernel is the only way to do anything real.
 
+![Linux syscalls: the user-kernel boundary and how every action crosses it](/linux-fundamentals/ch07-processes/linux-syscalls-user-kernel-boundary.png)
+
 ---
 
 Every process has a small set of properties the kernel tracks:
@@ -64,6 +66,8 @@ The normal pattern for starting a new program is: `fork` to create a copy of the
 
 This also means that namespaces are inherited through `fork`. When you create a new process inside a namespace, the child starts in the same namespace as the parent. To put a child in a new namespace, you call `unshare` or pass flags to `clone` (the lower-level syscall that `fork` is built on).
 
+![Linux fork and exec: how new processes come into existence](/linux-fundamentals/ch07-processes/linux-fork-and-exec-process-flow.png)
+
 ---
 
 PID 1 is special in one critical way beyond being first.
@@ -77,6 +81,8 @@ If PID 1 never calls `waitpid` — if it's not written to handle this — zombie
 This is why running a container with a naive `CMD ["python", "app.py"]` and no real init process can cause zombie accumulation. Python isn't written to be an init process. It doesn't reap orphans. Any child process it spawns — or any grandchild that outlives its parent — turns into a zombie.
 
 The fix is either to use a proper init as PID 1, or to use `--init` flags that inject a minimal reaper. tiny-aws sidesteps this for simple jobs by running them directly and tracking the top-level PID. For full instances using `systemd-nspawn --boot`, systemd runs as PID 1 inside the container and handles this correctly.
+
+![Linux PID 1 and zombie processes: what happens when parents don't reap children](/linux-fundamentals/ch07-processes/linux-pid-1-and-zombie-processes.png)
 
 ---
 
