@@ -64,6 +64,8 @@ That's 512 MB, in bytes. No special API. No daemon. Just a filesystem write. The
 
 Removing a cgroup: `rmdir` it. The kernel only allows this once the cgroup has no processes and no child cgroups. This is enforced — you can't orphan processes in a deleted cgroup.
 
+![Linux cgroups: the filesystem interface, controllers, and how limits are applied](/linux-fundamentals/ch09-cgroups/linux-cgroups-a-visual-guide.png)
+
 ---
 
 ## CPU limiting
