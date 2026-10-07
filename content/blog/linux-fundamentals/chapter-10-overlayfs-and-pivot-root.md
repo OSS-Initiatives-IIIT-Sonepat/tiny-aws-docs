@@ -30,6 +30,8 @@ Writing to `merged`: the write goes to `upperdir`. If the file didn't exist ther
 
 Deleting from `merged`: the kernel creates a special marker called a whiteout in `upperdir`. The merged view hides the file. The `lowerdir` original still exists, but it's masked.
 
+![OverlayFS union filesystem: lowerdir, upperdir, merged, and copy-on-write](/linux-fundamentals/ch10-overlayfs/overlayfs-union-filesystem-explained.png)
+
 ---
 
 ## In practice
@@ -109,6 +111,8 @@ The `-l` flag on `umount` means lazy unmount — the mount is detached from the 
 
 You're not hiding the host filesystem. You've removed it from the namespace's view entirely.
 
+![pivot_root vs chroot: why chroot can be escaped and pivot_root cannot](/linux-fundamentals/ch10-overlayfs/pivot-root-vs-chroot-escape-explained.png)
+
 ---
 
 ## Multiple lower layers
@@ -130,6 +134,8 @@ tiny-aws uses a single lower dir (one cached rootfs per build hash). Multiple la
 From the host's perspective: there's an overlay mount at some path in `/tmp`. There's a process running whose root is that path. The host can see all of this. It can inspect `/proc/<pid>/mounts` to see the overlay mount. It can look directly at the `upper` directory to see what the container has written.
 
 The isolation is from the container's perspective, not the host's. The host always has full visibility. This is the same as namespaces — one-directional. The container can't see out. The host can see in.
+
+![Host visibility into OverlayFS containers: the host sees everything, the container does not](/linux-fundamentals/ch10-overlayfs/host-visibility-into-overlayfs-containers.png)
 
 ---
 
