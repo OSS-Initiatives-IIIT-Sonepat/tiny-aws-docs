@@ -122,7 +122,7 @@ describe("blog to obsidian links", () => {
   it("builds an index from blog files", () => {
     const built = buildBlogLinkIndex(process.cwd());
     expect(
-      built.some((entry) => entry.blogSlug === "frontend/how-browsers-work"),
+      built.some((entry) => entry.blogSlug === "about/what-is-tiny-aws"),
     ).toBe(true);
   });
 });

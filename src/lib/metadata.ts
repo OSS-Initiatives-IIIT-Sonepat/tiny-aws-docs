@@ -65,6 +65,44 @@ export function buildSiteMetadata(): Metadata {
     },
     description:
       "How cloud infrastructure actually works — AWS vs tiny-aws, Coolify vs tiny-aws, and everything in between.",
+    icons: {
+      icon: [
+        {
+          url: "/tiny-aws-light.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          url: "/tiny-aws-dark.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: dark)",
+        },
+      ],
+      shortcut: [
+        {
+          url: "/tiny-aws-light.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          url: "/tiny-aws-dark.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: dark)",
+        },
+      ],
+      apple: [
+        {
+          url: "/tiny-aws-light.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          url: "/tiny-aws-dark.png",
+          type: "image/png",
+          media: "(prefers-color-scheme: dark)",
+        },
+      ],
+    },
     openGraph: {
       type: "website",
       siteName: SITE_NAME,
