@@ -239,3 +239,5 @@ The scheduler has no agents registered, or all instances are at capacity.
 ---
 
 One instance, one app, one load balancer route. That's the simplest possible deploy. Everything from here builds on this.
+
+When you want the same pipeline with a real workload — Rust compile, model download, Windows laptop talking to an Arch agent — see [Chapter 49b: Deploying Kokoro TTS](/building-the-cloud/chapter-49b-deploying-kokoro-tts).
