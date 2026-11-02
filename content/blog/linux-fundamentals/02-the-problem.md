@@ -8,6 +8,8 @@ date: "2026-01-03"
 
 For most of computing history, if you needed a computer, you bought one. If you needed more capacity, you ordered more hardware. That process took weeks. Sometimes months. This was fine when software moved slowly. **It stopped being fine when the internet arrived and suddenly you needed ten times the capacity on Black Friday and almost none of it in January.**
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jVTQL1sBCVM?si=EIi-bOi3Fs2GeYe1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 So people started asking a different question.
 
 > What if computation was more like electricity? You don't own a power plant. You don't buy a generator every time you want to charge your phone. You plug in, you draw what you need, you pay for what you used. When demand goes up, more power flows. When it drops, you stop paying.
@@ -28,6 +30,8 @@ But we skipped over something important.
 
 Virtualization. What does that actually mean?
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/o9rcaj5ON4A?si=opf26rsBoPGj6Mm4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Here's the physical reality. You have a server — a piece of metal with a CPU, some RAM, some disk. That CPU can execute billions of instructions per second. It can only do one thing at a time, but it switches between tasks so fast that everything feels simultaneous.
 (CPU's each core does not multitask. A single process is given to a single CPU core. There can be multiple cores for parallel processing.) 
 
@@ -42,6 +46,10 @@ The virtual machine thinks it owns real hardware. It boots an operating system. 
 The hypervisor enforces the illusion. It makes sure each VM's memory is invisible to the others. It schedules each VM's access to the real CPU. It translates each VM's disk writes into the right location on the real disk.
 
 When you launch an EC2 instance, you're getting one of these illusions. A virtual machine, carved out of a physical server in an AWS data center, with its own fake CPU and fake memory and fake disk — all backed by real hardware that AWS owns and operates.
+
+Introduction to Tiny AWS' own hypervisor:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/y31rBEiLz0c?si=hbsA60W0yPVXbrEU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 You don't know which physical server. You don't know which data center building. You don't need to. That's the whole point.
 
