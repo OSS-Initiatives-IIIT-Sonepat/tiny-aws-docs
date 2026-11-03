@@ -23,6 +23,7 @@ type Frontmatter = {
   isNew?: boolean;
   ogImage?: string;
   thumbnail?: string;
+  coverVideo?: string;
 };
 
 function titleCase(value: string) {
@@ -152,6 +153,7 @@ export function getAllPosts(): BlogPost[] {
         isNew: data.isNew ?? isRecentDate(date),
         ogImage: data.ogImage,
         thumbnail: data.thumbnail,
+        coverVideo: data.coverVideo,
         category,
         markdown,
         headings,

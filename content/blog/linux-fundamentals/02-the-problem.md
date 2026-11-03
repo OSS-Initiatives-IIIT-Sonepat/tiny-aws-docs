@@ -4,11 +4,10 @@ description: "For most of computing history, if you needed a computer, you bough
 author: "tiny-aws"
 inspiredBy: "tiny-aws docs"
 date: "2026-01-03"
+coverVideo: "jVTQL1sBCVM"
 ---
 
 For most of computing history, if you needed a computer, you bought one. If you needed more capacity, you ordered more hardware. That process took weeks. Sometimes months. This was fine when software moved slowly. **It stopped being fine when the internet arrived and suddenly you needed ten times the capacity on Black Friday and almost none of it in January.**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jVTQL1sBCVM?si=EIi-bOi3Fs2GeYe1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 So people started asking a different question.
 
