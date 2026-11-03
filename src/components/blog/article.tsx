@@ -51,6 +51,36 @@ export function BlogCoverImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+function youtubeEmbedSrc(value: string) {
+  const trimmed = value.trim();
+  if (/^https?:\/\//i.test(trimmed)) {
+    const match = trimmed.match(
+      /(?:youtube\.com\/embed\/|youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/,
+    );
+    const id = match?.[1];
+    return id ? `https://www.youtube.com/embed/${id}` : trimmed;
+  }
+  return `https://www.youtube.com/embed/${trimmed}`;
+}
+
+/** Same frame as the OG cover card, but a YouTube player. */
+export function BlogCoverVideo({ src, title }: { src: string; title: string }) {
+  return (
+    <figure className="w-full max-w-4xl overflow-hidden rounded-md border border-neutral-300 bg-black shadow-[0_18px_44px_rgba(15,15,18,0.12)] dark:border-zinc-700 dark:shadow-[0_18px_44px_rgba(0,0,0,0.45)]">
+      <div className="relative aspect-video w-full">
+        <iframe
+          src={youtubeEmbedSrc(src)}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full border-0"
+        />
+      </div>
+    </figure>
+  );
+}
+
 export function BlogSection({
   title,
   children,

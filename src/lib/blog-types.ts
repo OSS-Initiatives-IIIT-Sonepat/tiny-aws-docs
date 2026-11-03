@@ -17,6 +17,8 @@ export type BlogPost = {
   isNew?: boolean;
   ogImage?: string;
   thumbnail?: string;
+  /** YouTube id or embed URL — shown instead of the generated OG cover card. */
+  coverVideo?: string;
   category: string;
   markdown: string;
   headings: TOCHeading[];

@@ -7,6 +7,7 @@ import {
   BlogArticle,
   BlogCodeBlock,
   BlogCoverImage,
+  BlogCoverVideo,
   BlogHeader,
 } from "@/components/blog/article";
 import { MermaidDiagram } from "@/components/blog/mermaid-diagram";
@@ -88,7 +89,11 @@ export async function BlogPostView({
         }
       />
 
-      <BlogCoverImage src={coverSrc} alt={`Cover image for ${post.title}`} />
+      {post.coverVideo ? (
+        <BlogCoverVideo src={post.coverVideo} title={post.title} />
+      ) : (
+        <BlogCoverImage src={coverSrc} alt={`Cover image for ${post.title}`} />
+      )}
 
       <div className="space-y-6">
         <ReactMarkdown
@@ -228,6 +233,20 @@ export async function BlogPostView({
                 >
                   {children}
                 </video>
+              </div>
+            ),
+            iframe: ({ src, title }) => (
+              <div className="w-full max-w-4xl overflow-hidden rounded-md border border-neutral-300 bg-black shadow-[0_18px_44px_rgba(15,15,18,0.12)] dark:border-zinc-700 dark:shadow-[0_18px_44px_rgba(0,0,0,0.45)]">
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    src={typeof src === "string" ? src : undefined}
+                    title={title ?? "YouTube video"}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                </div>
               </div>
             ),
             script: () => null,
