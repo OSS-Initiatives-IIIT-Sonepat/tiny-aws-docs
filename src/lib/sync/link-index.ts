@@ -55,7 +55,7 @@ export function buildBlogLinkIndex(rootDir: string): BlogLinkIndexEntry[] {
 
       posts.push({
         blogSlug,
-        href: `/${blogSlug}`,
+        href: `/docs/${blogSlug}`,
         title,
         fileStem,
       });
@@ -131,7 +131,7 @@ export function resolveBlogHref(
     }
   }
 
-  const slug = pathname.replace(/^\/+|\/+$/g, "");
+  const slug = pathname.replace(/^\/+|\/+$/g, "").replace(/^docs\//i, "");
   if (!slug.includes("/")) return undefined;
 
   const lastSegment = slug.split("/").pop() ?? "";

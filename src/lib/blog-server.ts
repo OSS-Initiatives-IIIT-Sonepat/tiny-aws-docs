@@ -127,7 +127,7 @@ export function getAllPosts(): BlogPost[] {
       const noExt = rel.replace(/\.md$/, "");
       const segments = noExt.split(path.sep).filter(Boolean);
       const slug = segments.join("/");
-      const href = `/${slug}`;
+      const href = `/docs/${slug}`;
       const category = titleCase(segments[0] ?? "General");
 
       const source = fs.readFileSync(absPath, "utf8");
@@ -232,5 +232,5 @@ export function getDefaultPostPath() {
   const posts = getAllPosts();
   const preferred = posts.find((post) => post.segments[0] === "about");
   const first = preferred ?? posts[0];
-  return first?.href ?? "/";
+  return first?.href ?? "/docs";
 }

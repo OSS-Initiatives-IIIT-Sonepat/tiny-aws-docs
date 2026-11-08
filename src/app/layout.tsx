@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Funnel_Display, Geist, Geist_Mono, IBM_Plex_Mono, Inter, Orbitron } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/layout/navbar";
-import {
-  getAllPosts,
-  getBlogLinks,
-  getDefaultPostPath,
-} from "@/lib/blog-server";
 import { buildSiteMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -25,19 +19,35 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
+const landingDisplay = Funnel_Display({
+  variable: "--font-landing-display",
+  subsets: ["latin"],
+});
+
+const landingSans = Inter({
+  variable: "--font-landing-sans",
+  subsets: ["latin"],
+});
+
+const landingMono = IBM_Plex_Mono({
+  variable: "--font-landing-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = buildSiteMetadata();
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const posts = getAllPosts();
-  const links = getBlogLinks(posts);
-  const homeHref = getDefaultPostPath();
-
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${landingDisplay.variable} ${landingSans.variable} ${landingMono.variable}`}
+    >
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${geistSans.className} flex min-h-screen flex-col antialiased selection:bg-foreground selection:text-background`}
@@ -48,7 +58,6 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar links={links} homeHref={homeHref} />
           {children}
         </ThemeProvider>
       </body>

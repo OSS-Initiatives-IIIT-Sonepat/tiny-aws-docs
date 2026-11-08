@@ -20,6 +20,7 @@ type MindMapNode = {
   label: string;
   kind: "root" | "category" | "post";
   slug?: string;
+  href?: string;
 };
 
 type MindMapLink = {
@@ -60,13 +61,14 @@ export function BlogMindmap({
         edges.push({ source: "root", target: categoryId });
       }
 
-      const postSlug = post.href.replace(/^\//, "");
+      const postSlug = post.href.replace(/^\/docs\//, "").replace(/^\//, "");
       const postId = `post:${postSlug}`;
       nodes.push({
         id: postId,
         label: post.title,
         kind: "post",
         slug: postSlug,
+        href: post.href,
       });
       edges.push({ source: categoryId, target: postId });
     }
@@ -79,7 +81,7 @@ export function BlogMindmap({
       const typed = node as MindMapNode;
       if (!typed.slug) return;
       setExpanded(false);
-      router.push(`/${typed.slug}`);
+      router.push(typed.href ?? `/docs/${typed.slug}`);
     },
     [router],
   );
