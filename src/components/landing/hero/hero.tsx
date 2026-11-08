@@ -15,9 +15,9 @@ export function Hero() {
           >
             A tiny cloud, on your own machine.
           </h1>
-          <p className="mt-6 max-w-[480px] text-[17px] leading-[1.55] tracking-[-0.01em] text-fg-muted lg:text-[19px]">
-            A self-hosted mini-AWS. Instances, functions, object storage, queues, and a load balancer, running on a
-            Linux machine you control.
+          <p className="mt-6 max-w-[520px] text-[17px] leading-[1.55] tracking-[-0.01em] text-fg-muted lg:text-[19px]">
+            <span className="text-fg">10,000 lines of Rust and Golang.</span> The minimum amount of code required to
+            turn your Linux machine into a full cloud.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a

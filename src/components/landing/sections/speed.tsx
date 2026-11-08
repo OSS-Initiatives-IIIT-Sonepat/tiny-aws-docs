@@ -16,7 +16,7 @@ export function Speed() {
       <StatRow
         className="mt-12 lg:mt-16"
         stats={[
-          { label: "Codebase", value: "~10k", note: "lines, on purpose" },
+          { label: "Codebase", value: "10,000", note: "Rust and Golang" },
           { label: "Instance types", value: "5", note: "nano through large" },
           { label: "Where it runs", value: "1 box", note: "or a small cluster" },
           { label: "Docker", value: "None", note: "debootstrap rootfs" },
