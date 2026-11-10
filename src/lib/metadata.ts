@@ -4,7 +4,7 @@ import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 import { getPostThumbnail, resolveThumbnailUrl } from "@/lib/thumbnail";
 
 const DEFAULT_OG_IMAGE = "/vengeance-image.png";
-const SITE_NAME = "tiny-aws docs";
+const SITE_NAME = "tiny-aws";
 
 function resolveCustomThumbnail(post: BlogPost) {
   const image = getPostThumbnail(post);
@@ -60,11 +60,11 @@ export function buildSiteMetadata(): Metadata {
   return {
     metadataBase: new URL(getSiteUrl()),
     title: {
-      default: "tiny-aws docs",
+      default: "tiny-aws",
       template: `%s | ${SITE_NAME}`,
     },
     description:
-      "How cloud infrastructure actually works — AWS vs tiny-aws, Coolify vs tiny-aws, and everything in between.",
+      "A tiny cloud on your own Linux machine. Instances, deploys, object storage, queues, and the docs for how it works.",
     icons: {
       icon: [
         {
@@ -106,16 +106,16 @@ export function buildSiteMetadata(): Metadata {
     openGraph: {
       type: "website",
       siteName: SITE_NAME,
-      title: "tiny-aws docs",
+      title: "tiny-aws",
       description:
-        "How cloud infrastructure actually works — AWS vs tiny-aws, Coolify vs tiny-aws, and everything in between.",
-      images: [{ url: image, alt: "tiny-aws docs" }],
+        "A tiny cloud on your own Linux machine. Instances, deploys, object storage, queues, and the docs for how it works.",
+      images: [{ url: image, alt: "tiny-aws" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "tiny-aws docs",
+      title: "tiny-aws",
       description:
-        "How cloud infrastructure actually works — AWS vs tiny-aws, Coolify vs tiny-aws, and everything in between.",
+        "A tiny cloud on your own Linux machine. Instances, deploys, object storage, queues, and the docs for how it works.",
       images: [image],
     },
   };

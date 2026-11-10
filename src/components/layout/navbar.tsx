@@ -63,7 +63,8 @@ export function Navbar({
   }, [links]);
   const aboutHref = useMemo(
     () =>
-      links.find((post) => post.href.startsWith("/about/"))?.href ?? homeHref,
+      links.find((post) => post.href.startsWith("/docs/about/"))?.href ??
+      homeHref,
     [homeHref, links],
   );
   const portfolioHref =
@@ -76,13 +77,13 @@ export function Navbar({
       <div className="w-full px-4 md:px-8">
         <div className="flex items-center justify-between py-3 lg:py-4">
           <Link
-            href={homeHref}
+            href="/"
             className="flex w-fit items-center gap-3"
             prefetch
           >
             <LogoIcon className="h-9 w-9" />
             <span className="font-[family-name:var(--font-orbitron)] text-xl font-bold tracking-tight">
-              tiny-aws docs
+              tiny-aws
             </span>
           </Link>
 
