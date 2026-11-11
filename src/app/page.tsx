@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/landing/sections/how-it-works";
 import { SiteFooter } from "@/components/landing/sections/site-footer";
 import { SiteHeader } from "@/components/landing/sections/site-header";
 import { Speed } from "@/components/landing/sections/speed";
+import { Testimonials } from "@/components/landing/sections/testimonials";
 import { StructuredData } from "@/components/landing/structured-data";
 import { RevealObserver } from "@/components/landing/ui/reveal-observer";
 import { site } from "@/lib/landing/site";
@@ -44,6 +45,7 @@ export default function HomePage() {
         <HowItWorks />
         <Speed />
         <Connect />
+        <Testimonials />
         <Faq />
       </main>
       <SiteFooter />
