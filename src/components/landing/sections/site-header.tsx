@@ -5,6 +5,7 @@ import { Logo } from "@/components/landing/ui/logo";
 import { formatStars, getStarCount } from "@/lib/landing/github";
 import { site } from "@/lib/landing/site";
 import { HeaderShell } from "./header-shell";
+import { SectionMenu, SectionNav } from "./section-nav";
 
 function StarButton({ stars }: { stars: number | null }) {
   return (
@@ -31,10 +32,12 @@ export function SiteHeader() {
   return (
     <HeaderShell>
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6">
-        <Link href="/" aria-label="tiny-aws home" className="-m-1 rounded-[6px] p-1">
+        <Link href="/" aria-label="tiny-aws home" className="-m-1 shrink-0 rounded-[6px] p-1">
           <Logo />
         </Link>
-        <div className="flex items-center gap-2 sm:gap-3">
+        <SectionNav />
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <SectionMenu />
           <Link
             href="/docs"
             className="inline-flex h-9 items-center rounded-[10px] px-3 text-[14px] font-medium text-fg-muted transition-colors duration-150 hover:text-fg"
