@@ -66,6 +66,23 @@ export function WhatItIs() {
           </li>
         ))}
       </ul>
+      <figure className="mt-14 overflow-hidden rounded-[18px] border border-orange/35 bg-panel shadow-[0_0_0_1px_rgba(226,122,56,0.12),0_28px_70px_rgba(0,0,0,0.45)]">
+        <div className="bx-pixel-dash h-[3px]" aria-hidden="true" />
+        <div className="p-1.5">
+          <div className="overflow-hidden rounded-[12px] border border-line bg-black">
+            <div className="relative aspect-video w-full">
+              <iframe
+                src="https://www.youtube.com/embed/kbjzpmoWtuE"
+                title="Why Tiny AWS?"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full border-0"
+              />
+            </div>
+          </div>
+        </div>
+      </figure>
     </Section>
   );
 }
