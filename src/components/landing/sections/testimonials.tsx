@@ -4,8 +4,6 @@ import { useState } from "react";
 import { XIcon } from "@/components/landing/ui/brand-icons";
 import { Accent, Section, SectionHeader } from "@/components/landing/ui/section-header";
 
-const THREAD = "https://x.com/shubhamm069/status/2118534657033830532";
-
 type Reply = {
   name: string;
   handle: string;
@@ -228,15 +226,7 @@ export function Testimonials() {
             From the <Accent>thread</Accent>
           </>
         }
-        lead={
-          <>
-            Replies on the{" "}
-            <a href={THREAD} className="text-orange underline decoration-orange/40 underline-offset-2">
-              systems programming post
-            </a>
-            . Chinese replies keep the original text, with a translation under it.
-          </>
-        }
+        lead="What people think about Tiny AWS."
       />
       <div className="mt-12 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-reveal>
         {REPLIES.map((reply) => (
